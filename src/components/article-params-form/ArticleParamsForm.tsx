@@ -1,6 +1,6 @@
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
-import { useState, useRef, FormEvent } from 'react';
+import { useState, useRef } from 'react';
 import clsx from 'clsx';
 import { Text } from 'src/ui/text';
 import { Select } from 'src/ui/select';
@@ -12,6 +12,7 @@ import {
 	fontColors,
 	fontFamilyOptions,
 	fontSizeOptions,
+	defaultArticleState
 } from 'src/constants/articleProps';
 import { RadioGroup } from 'src/ui/radio-group';
 import { Separator } from 'src/ui/separator';
@@ -34,6 +35,11 @@ export const ArticleParamsForm = ({
 	
 	const handleChange = (key: keyof ArticleStateType, value: OptionType) => {
 		setSelectArticleState({...selectArticleState, [key]: value })
+	}
+
+	const handleReset = () => {
+		setSelectArticleState(defaultArticleState)
+		setCurrentArticleState(defaultArticleState)
 	}
 
 	useOutsideClickClose ({
@@ -96,7 +102,7 @@ export const ArticleParamsForm = ({
                         onChange = {(option)=> handleChange('contentWidth', option)}					
                     />
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' htmlType='reset' type='clear' />
+						<Button title='Сбросить' htmlType='reset' type='clear' onClick={handleReset} />
 						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>
 				</form>
